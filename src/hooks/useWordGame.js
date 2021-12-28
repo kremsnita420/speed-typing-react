@@ -27,12 +27,12 @@ function useWordGame() {
         textBoxRef.current.focus()
     }
 
-    function endGame() {
-        setIsTimeRunning(false)
-        setWordCount(calculateWordCount(text))
-    }
 
     useEffect(() => {
+        function endGame() {
+            setIsTimeRunning(false)
+            setWordCount(calculateWordCount(text))
+        }
         if (isTimeRunning && timeRemaining > 0) {
             setTimeout(() => {
                 setTimeRemaining(time => time - 1)
@@ -40,7 +40,7 @@ function useWordGame() {
         } else if (timeRemaining === 0) {
             endGame()
         }
-    }, [timeRemaining, isTimeRunning, endGame])
+    }, [timeRemaining, isTimeRunning, text])
 
     return { textBoxRef, handleChange, text, isTimeRunning, timeRemaining, startGame, wordCount }
 }
